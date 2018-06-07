@@ -1,0 +1,16 @@
+<xml>
+    <Setup>
+        <Element name="Tyres" desc="select the tyres" type="fileList" default="SavunGrip" position="F">
+            <FileList from="tyres">
+                <Values element="Wheels/Front/Tyre/type" />
+                <Values element="Wheels/Rear/Tyre/type" />
+            </FileList>
+        </Element>
+        <Element name="Front Brake Ripartition" desc="select the front brake ripartition" type="tick" default="75" position="F">
+            <Tick value="20|80|5">
+                <!-- valore = (tick * gain ) + bias -->
+                <Values element="Brakes/repartition" gain="0.01" bias="0"/>
+            </Tick>
+        </Element>
+    </Setup>
+</xml>

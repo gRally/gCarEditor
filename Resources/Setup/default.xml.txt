@@ -1,0 +1,6 @@
+<xml>
+  <Setup>
+    <Item name="Tyres" value="SavunGrip" />
+    <Item name="Front Brake Ripartition" value="65" />
+  </Setup>
+</xml>
