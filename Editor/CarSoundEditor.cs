@@ -23,8 +23,8 @@ public class CarSoundEditor : Editor
         EditorGUILayout.TextField("rpm", carSound.rpm.ToString());
         EditorGUILayout.TextField("throttleVolume", carSound.throttleVolume.ToString());
         EditorGUILayout.TextField("coasterVolume", carSound.coasterVolume.ToString());
-        EditorGUILayout.TextField("throttle", carSound.throttleStr);
-        EditorGUILayout.TextField("coaster", carSound.coasterStr);
+        EditorGUILayout.TextField("throttle", carSound.DebugPower);
+        EditorGUILayout.TextField("coaster", carSound.DebugCoaster);
 
         EditorGUILayout.BeginHorizontal();
         EditorGUILayout.PrefixLabel("Test Sounds:");
@@ -73,7 +73,7 @@ public class CarSoundEditor : Editor
 
         // POWER ------------------------------------------------------------------------------------------------------------------------------------
         EditorGUILayout.BeginHorizontal();
-        EditorGUILayout.LabelField("Power: (minRpm|maxRpm|recordRpm)" );
+        EditorGUILayout.LabelField("Power:");
         GUI.color = new Color32(125, 255, 123, 255);
         if (GUILayout.Button("+"))
         {
@@ -107,8 +107,9 @@ public class CarSoundEditor : Editor
         }
 
         // COASTER ----------------------------------------------------------------------------------------------------------------------------------
+        GUILayout.Space(5);
         EditorGUILayout.BeginHorizontal();
-        EditorGUILayout.LabelField("Coaster: (minRpm|maxRpm|recordRpm)" );
+        EditorGUILayout.LabelField("Coaster:");
         GUI.color = new Color32(125, 255, 123, 255);
         if (GUILayout.Button("+"))
         {
@@ -142,8 +143,9 @@ public class CarSoundEditor : Editor
         }
 
         // REVERSE ----------------------------------------------------------------------------------------------------------------------------------
+        GUILayout.Space(5);
         EditorGUILayout.BeginHorizontal();
-        EditorGUILayout.LabelField("Reverse: (recordRpm)" );
+        EditorGUILayout.LabelField("Reverse:");
         GUI.color = new Color32(125, 255, 123, 255);
         if (GUILayout.Button("+"))
         {
@@ -174,8 +176,9 @@ public class CarSoundEditor : Editor
         EditorGUILayout.EndHorizontal();
 
         // IDLE -------------------------------------------------------------------------------------------------------------------------------------
+        GUILayout.Space(5);
         EditorGUILayout.BeginHorizontal();
-        EditorGUILayout.LabelField("Idle: (recordRpm)");
+        EditorGUILayout.LabelField("Idle:");
         GUI.color = new Color32(125, 255, 123, 255);
         if (GUILayout.Button("+"))
         {
@@ -206,8 +209,9 @@ public class CarSoundEditor : Editor
         EditorGUILayout.EndHorizontal();
 
         // MAX RPM ----------------------------------------------------------------------------------------------------------------------------------
+        GUILayout.Space(5);
         EditorGUILayout.BeginHorizontal();
-        EditorGUILayout.LabelField("MaxRpm: (recordRpm)");
+        EditorGUILayout.LabelField("MaxRpm:");
         GUI.color = new Color32(125, 255, 123, 255);
         if (GUILayout.Button("+"))
         {
@@ -276,7 +280,7 @@ public class CarSoundEditor : Editor
 
         // POWER ------------------------------------------------------------------------------------------------------------------------------------
         EditorGUILayout.BeginHorizontal();
-        EditorGUILayout.LabelField("Power: (minRpm|maxRpm|recordRpm)" );
+        EditorGUILayout.LabelField("Power:");
         GUI.color = new Color32(125, 255, 123, 255);
         if (GUILayout.Button("+"))
         {
@@ -310,8 +314,9 @@ public class CarSoundEditor : Editor
         }
 
         // COASTER ----------------------------------------------------------------------------------------------------------------------------------
+        GUILayout.Space(5);
         EditorGUILayout.BeginHorizontal();
-        EditorGUILayout.LabelField("Coaster: (minRpm|maxRpm|recordRpm)" );
+        EditorGUILayout.LabelField("Coaster:");
         GUI.color = new Color32(125, 255, 123, 255);
         if (GUILayout.Button("+"))
         {
@@ -345,8 +350,9 @@ public class CarSoundEditor : Editor
         }
 
         // REVERSE ----------------------------------------------------------------------------------------------------------------------------------
+        GUILayout.Space(5);
         EditorGUILayout.BeginHorizontal();
-        EditorGUILayout.LabelField("Reverse: (recordRpm)" );
+        EditorGUILayout.LabelField("Reverse:");
         GUI.color = new Color32(125, 255, 123, 255);
         if (GUILayout.Button("+"))
         {
@@ -377,8 +383,9 @@ public class CarSoundEditor : Editor
         EditorGUILayout.EndHorizontal();
 
         // IDLE -------------------------------------------------------------------------------------------------------------------------------------
+        GUILayout.Space(5);
         EditorGUILayout.BeginHorizontal();
-        EditorGUILayout.LabelField("Idle: (recordRpm)");
+        EditorGUILayout.LabelField("Idle:");
         GUI.color = new Color32(125, 255, 123, 255);
         if (GUILayout.Button("+"))
         {
@@ -409,8 +416,9 @@ public class CarSoundEditor : Editor
         EditorGUILayout.EndHorizontal();
 
         // MAX RPM ----------------------------------------------------------------------------------------------------------------------------------
+        GUILayout.Space(5);
         EditorGUILayout.BeginHorizontal();
-        EditorGUILayout.LabelField("MaxRpm: (recordRpm)");
+        EditorGUILayout.LabelField("MaxRpm:");
         GUI.color = new Color32(125, 255, 123, 255);
         if (GUILayout.Button("+"))
         {

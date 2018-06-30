@@ -128,11 +128,11 @@ public class CarSound : MonoBehaviour
             intCoasterSrc[i] = CreateAudioSource(IntCoasterSnd[i].Audio, true, true, enginePositionV);
         }
         // idle
-        if (intIdleSrc != null) intIdleSrc = CreateAudioSource(IntIdleSnd.Audio, true, true, enginePositionV);
+        if (IntIdleSnd != null) intIdleSrc = CreateAudioSource(IntIdleSnd.Audio, true, true, enginePositionV);
         // limiter
-        if (intLimiterSrc != null) intLimiterSrc = CreateAudioSource(IntLimiterSnd.Audio, true, true, enginePositionV);
+        if (IntLimiterSnd != null) intLimiterSrc = CreateAudioSource(IntLimiterSnd.Audio, true, true, enginePositionV);
         // reverse
-        if (intReverseSrc != null) intReverseSrc = CreateAudioSource(IntReverseSnd.Audio, true, true, enginePositionV);
+        if (IntReverseSnd != null) intReverseSrc = CreateAudioSource(IntReverseSnd.Audio, true, true, enginePositionV);
     }
     
     void Update ()
@@ -178,6 +178,15 @@ public class CarSound : MonoBehaviour
 
         bool interior = false;
 
+        // check
+        if (ExtIdleSnd != null && extIdleSrc == null) extIdleSrc = CreateAudioSource(ExtIdleSnd.Audio, true, true, Vector3.zero);
+        if (ExtLimiterSnd != null && extLimiterSrc == null) extLimiterSrc = CreateAudioSource(ExtLimiterSnd.Audio, true, true, Vector3.zero);
+        if (ExtReverseSnd != null && extReverseSrc == null) extReverseSrc = CreateAudioSource(ExtReverseSnd.Audio, true, true, Vector3.zero);
+        if (IntIdleSnd != null && intIdleSrc == null) intIdleSrc = CreateAudioSource(IntIdleSnd.Audio, true, true, Vector3.zero);
+        if (IntLimiterSnd != null && intLimiterSrc == null) intLimiterSrc = CreateAudioSource(IntLimiterSnd.Audio, true, true, Vector3.zero);
+        if (IntReverseSnd != null && intReverseSrc == null) intReverseSrc = CreateAudioSource(IntReverseSnd.Audio, true, true, Vector3.zero);
+        if (helper == null) helper = new gPhys.Sound.Helper();
+
         helper.Update(interior, pitchCorrection, clipsValue, throttleVolume,
             ref ExtPowerSnd, ref ExtCoasterSnd,
             ref IntPowerSnd, ref IntCoasterSnd,
@@ -204,14 +213,14 @@ public class CarSound : MonoBehaviour
             string tmp = "";
             foreach(var item in extPowerSrc)
             {
-                if (!EnablePower) item.volume = 0.0f;
+                //if (!EnablePower) item.volume = 0.0f;
                 tmp += string.Format("{0:0.00} ", item.volume);
             }
             DebugPower = tmp;
             tmp = "";
             foreach(var item in extCoasterSrc)
             {
-                if (!EnableCoaster) item.volume = 0.0f;
+                //if (!EnableCoaster) item.volume = 0.0f;
                 tmp += string.Format("{0:0.00} ", item.volume);
             }
             DebugCoaster = tmp;
