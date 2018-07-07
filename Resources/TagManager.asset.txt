@@ -14,7 +14,7 @@ TagManager:
   - 
   - 
   - CarModel
-  - Vegetation
+  - VEGETATION
   - 
   - 
   - 
