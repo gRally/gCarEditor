@@ -353,7 +353,7 @@ public class CarPhysics : MonoBehaviour
                 x.AppendLine(string.Format("{0}{0}{0}toe=\"{1}\">", t, item.Toe));
 
                 x.AppendLine(string.Format("{0}{0}{0}<Tyre", t));
-                x.AppendLine(string.Format("{0}{0}{0}{0}size=\"{1}, {2}, {3}\"", t, Convert.ToInt32(item.WheelSize.x), Convert.ToInt32(item.WheelSize.z), Convert.ToInt32(item.WheelSize.y)));
+                x.AppendLine(string.Format("{0}{0}{0}{0}size=\"{1}, {2}, {3}\"", t, Convert.ToInt32(item.GetSize().x), Convert.ToInt32(item.GetSize().z), Convert.ToInt32(item.GetSize().y)));
                 x.AppendLine(string.Format("{0}{0}{0}{0}type=\"tyres/SavunGrip\"", t));
                 x.AppendLine(string.Format("{0}{0}{0}{0}pressure=\"{1}\">", t, item.NominalPressure));
                 x.AppendLine(string.Format("{0}{0}{0}</Tyre>", t));

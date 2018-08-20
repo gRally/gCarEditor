@@ -5,7 +5,7 @@ using System.Collections;
 public class GR_PhWheel : MonoBehaviour
 {
     //Mesh w;
-    public Vector3 WheelSize = new Vector3(195f, 15f, 50f);
+    public string WheelSize = "195/50 R15";
     public float NominalPressure;
     public float Camber;
     public float CurrentCamber;
@@ -66,15 +66,23 @@ public class GR_PhWheel : MonoBehaviour
     // Use this for initialization
 	void Start ()
     {
-        gizmo.SetCommercialSize(WheelSize);
-        gizmo.Create();
-        //CreateGizmoWheel();
+        InitGizmo();
 	}
-	
-	// Update is called once per frame
-	void Update ()
+
+    public void InitGizmo()
     {
-        gizmo.SetCommercialSize(WheelSize);
+        if (gizmo == null)
+        {
+            gizmo = new gPhys.Wheel.Gizmo();
+        }
+        gizmo.SetRacingSize(WheelSize);
+        gizmo.Create();
+    }
+
+    // Update is called once per frame
+    void Update ()
+    {
+        gizmo.SetRacingSize(WheelSize);
 
         float displacement = DistanceTraveled;
         if (displacement > Travel)
@@ -98,6 +106,13 @@ public class GR_PhWheel : MonoBehaviour
                     ref quatCamber, ref WheelPos);
                 break;
         }
+
+        // change dummy wheel size
+        var cylinder = GameObject.Find("dummy" + name);
+        if (cylinder != null)
+        {
+            cylinder.transform.localScale = new Vector3(GetRadius() * 2.0f, GetWidth() * 0.5f, GetRadius() * 2.0f);
+        }
     }
 
     private float angleAtZero;
@@ -105,12 +120,19 @@ public class GR_PhWheel : MonoBehaviour
     
     public float GetWidth()
     {
-        return gizmo.GetWidth();
+        var value = gizmo.GetWidth();
+        return value;
+    }
+
+    public Vector3 GetSize()
+    {
+        return gizmo.GetSize();
     }
 
     public float GetRadius()
     {
-        return gizmo.GetRadius();
+        var value = gizmo.GetRadius();
+        return value;
     }
 
     void OnDrawGizmos()
@@ -119,7 +141,7 @@ public class GR_PhWheel : MonoBehaviour
 
         if (DrawWireFrame)
         {
-            gizmo.SetCommercialSize(WheelSize);
+            gizmo.SetRacingSize(WheelSize);
             gizmo.Draw(WheelPos, quatCamber);
         }
     }

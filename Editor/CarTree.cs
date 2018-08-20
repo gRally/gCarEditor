@@ -11,8 +11,8 @@ public class CarTree : EditorWindow
     public string WheelBase = "2.470";
     public string TrackTreadFront = "1.500";
     public string TrackTreadRear = "1.500";
-    public string FrontWheel ="205/55 R15";
-    public string RearWheel ="205/55 R15";
+    public string FrontWheel ="24/61-17";
+    public string RearWheel = "24/61-17";
 
     float _wheelBase;
     float _trackTreadFront;
@@ -152,8 +152,19 @@ public class CarTree : EditorWindow
 
     void DefaultValues()
     {
-        var fwSize = FrontWheel.Split(new char[] {'/', 'R'});
-        var rwSize = RearWheel.Split(new char[] {'/', 'R'});
+        // create rearAxle
+        var test = GameObject.Find("rearAxle");
+        if (test == null)
+        {
+            var rearAxle = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
+            var mat = new Material(Shader.Find("Standard"));
+            mat.color = new Color32(170, 229, 151, 255);
+            rearAxle.GetComponent<Renderer>().sharedMaterial = mat;
+            rearAxle.name = "rearAxle";
+            rearAxle.transform.rotation = Quaternion.Euler(0.0f, 0.0f, 90.0f);
+            rearAxle.transform.position = Vector3.zero;
+            rearAxle.transform.localScale = new Vector3(0.05f, 3.0f, 0.05f);
+        }
 
         // wheels:
         GameObject.Find("RallyCar/WheelFL").transform.position = new Vector3(_trackTreadFront * -0.5f, 0.0f, _wheelBase);
@@ -168,6 +179,9 @@ public class CarTree : EditorWindow
         GameObject.Find("RallyCar/SuspBR").transform.position = new Vector3(_trackTreadRear * 0.5f, 0.0f, 0.0f);
 
         // GR_PhWheel
+        var matW = new Material(Shader.Find("Standard"));
+        matW.color = new Color32(40, 40, 40, 255);
+
         foreach (var wh in GameObject.FindObjectsOfType<GR_PhWheel>())
         {
             if (wh.name == "WheelFL")
@@ -175,7 +189,7 @@ public class CarTree : EditorWindow
                 wh.transform.position = new Vector3(_trackTreadFront * -0.5f, 0.0f, _wheelBase);
                 wh.SuspensionType = GR_PhWheel.SUSPENSION_TYPE.MACPHERSON;
                 wh.WheelPosition = gPhys.WHEEL_POSITION.FRONT_LEFT;
-                wh.WheelSize = new Vector3(Convert.ToInt32(fwSize[0].Trim()), Convert.ToInt32(fwSize[2].Trim()), Convert.ToInt32(fwSize[1].Trim()));
+                wh.WheelSize = FrontWheel;
                
                 wh.StrutTop = wh.transform.position + new Vector3(0.19f, 0.55f, 0.0f);
                 wh.StrutHinge = wh.transform.position + new Vector3(0.385f, 0.06f, 0.0f);
@@ -196,7 +210,7 @@ public class CarTree : EditorWindow
                 wh.transform.position = new Vector3(_trackTreadFront * 0.5f, 0.0f, _wheelBase);
                 wh.SuspensionType = GR_PhWheel.SUSPENSION_TYPE.MACPHERSON;
                 wh.WheelPosition = gPhys.WHEEL_POSITION.FRONT_RIGHT;
-                wh.WheelSize = new Vector3(Convert.ToInt32(fwSize[0].Trim()), Convert.ToInt32(fwSize[2].Trim()), Convert.ToInt32(fwSize[1].Trim()));
+                wh.WheelSize = FrontWheel;
                 
                 wh.StrutTop = wh.transform.position + new Vector3(-0.19f, 0.55f, 0.0f);
                 wh.StrutHinge = wh.transform.position + new Vector3(-0.385f, 0.06f, 0.0f);
@@ -218,7 +232,7 @@ public class CarTree : EditorWindow
                 wh.SuspensionType = GR_PhWheel.SUSPENSION_TYPE.SIMPLE;
                 wh.WheelPosition = gPhys.WHEEL_POSITION.REAR_LEFT;
                 wh.WheelPos = wh.transform.position;
-                wh.WheelSize = new Vector3(Convert.ToInt32(rwSize[0].Trim()), Convert.ToInt32(rwSize[2].Trim()), Convert.ToInt32(rwSize[1].Trim()));
+                wh.WheelSize = RearWheel;
 
                 wh.WheelHinge = wh.transform.position + new Vector3(-0.02f, -0.01f, 0.0f);
                 wh.WheelChassis = wh.transform.position + new Vector3(1.261f, 0.351f, 0.0f);
@@ -235,7 +249,7 @@ public class CarTree : EditorWindow
                 wh.SuspensionType = GR_PhWheel.SUSPENSION_TYPE.SIMPLE;
                 wh.WheelPosition = gPhys.WHEEL_POSITION.REAR_RIGHT;
                 wh.WheelPos = wh.transform.position;
-                wh.WheelSize = new Vector3(Convert.ToInt32(rwSize[0].Trim()), Convert.ToInt32(rwSize[2].Trim()), Convert.ToInt32(rwSize[1].Trim()));
+                wh.WheelSize = RearWheel;
 
                 wh.WheelHinge = wh.transform.position + new Vector3(0.02f, -0.01f, 0.0f);
                 wh.WheelChassis = wh.transform.position + new Vector3(-1.261f, 0.351f, 0.0f);
@@ -246,7 +260,18 @@ public class CarTree : EditorWindow
                 wh.Travel = 0.28f;
                 wh.AntiRoll = 4.5f;
             }
+
             wh.NominalPressure = 1.85f;
+            wh.InitGizmo();
+
+            // create the cylinder
+            var cylinder = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
+            cylinder.GetComponent<Renderer>().sharedMaterial = matW;
+            cylinder.name = "dummy" + wh.name;
+            cylinder.transform.parent = GameObject.Find("RallyCar/" + wh.name).transform;
+            cylinder.transform.localRotation = Quaternion.Euler(0.0f, 0.0f, 90.0f);
+            cylinder.transform.localPosition = Vector3.zero;
+            cylinder.transform.localScale = new Vector3(wh.GetRadius() * 2.0f, wh.GetWidth() * 0.5f, wh.GetRadius() * 2.0f);
         }
 
         // dash

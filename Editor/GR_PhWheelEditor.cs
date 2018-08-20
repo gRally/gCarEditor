@@ -95,9 +95,7 @@ public class GR_PhWheelEditorEditor : Editor
         EditorGUILayout.LabelField("Wheel", EditorStyles.boldLabel);
         EditorGUILayout.PropertyField(serializedObject.FindProperty("WheelPosition"), new GUIContent("[O]"));
         GUILayout.Space(5);
-        EditorGUILayout.PropertyField(serializedObject.FindProperty("WheelSize.x"), new GUIContent ("Tire Width [mm]"));
-        EditorGUILayout.PropertyField(serializedObject.FindProperty("WheelSize.z"), new GUIContent("Height/Width Ratio"));
-        EditorGUILayout.PropertyField(serializedObject.FindProperty("WheelSize.y"), new GUIContent("Rim Diameter [inch]"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("WheelSize"), new GUIContent ("Tyre size"));
         GUILayout.Space(5);
         EditorGUILayout.PropertyField(serializedObject.FindProperty("NominalPressure"), new GUIContent("Nominal Pressure [bar]"));
         GUILayout.Space(5);
@@ -150,7 +148,6 @@ public class GR_PhWheelEditorEditor : Editor
         EditorGUILayout.PropertyField(serializedObject.FindProperty("Rebound"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("Travel"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("AntiRoll"));
-
 
         if (t.SuspensionType == GR_PhWheel.SUSPENSION_TYPE.MACPHERSON)
         {
