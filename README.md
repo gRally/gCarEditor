@@ -1,4 +1,4 @@
-# v.1.2.0 
+# v.1.2.0 of 20 aug 2018
 - Added turbo management;
 - Added center differential;
 - Added LSD differentials;
