@@ -32,6 +32,8 @@ public class CarSound : MonoBehaviour
     public CarSoundItem IntReverseSnd;
     public CarSoundItem ExtLimiterSnd;
     public CarSoundItem IntLimiterSnd;
+    public CarSoundItem ExtTurboSnd;
+    public CarSoundItem IntTurboSnd;
 
     public AudioClip ShiftEngageAudio;
     public AudioClip ShiftUpAudio;
@@ -53,6 +55,8 @@ public class CarSound : MonoBehaviour
     AudioSource intReverseSrc;
     AudioSource extLimiterSrc;
     AudioSource intLimiterSrc;
+    AudioSource extTurboSrc;
+    AudioSource intTurboSrc;
 
     // debug
     public float throttleVolume;
@@ -113,6 +117,8 @@ public class CarSound : MonoBehaviour
         if (ExtLimiterSnd != null) extLimiterSrc = CreateAudioSource(ExtLimiterSnd.Audio, true, true, enginePositionV);
         // reverse
         if (ExtReverseSnd != null) extReverseSrc = CreateAudioSource(ExtReverseSnd.Audio, true, true, enginePositionV);
+        // turbo
+        if (ExtTurboSnd != null) extTurboSrc = CreateAudioSource(ExtTurboSnd.Audio, true, true, enginePositionV);
 
         // int
         // power
@@ -133,6 +139,8 @@ public class CarSound : MonoBehaviour
         if (IntLimiterSnd != null) intLimiterSrc = CreateAudioSource(IntLimiterSnd.Audio, true, true, enginePositionV);
         // reverse
         if (IntReverseSnd != null) intReverseSrc = CreateAudioSource(IntReverseSnd.Audio, true, true, enginePositionV);
+        // turbo
+        if (IntTurboSnd != null) intTurboSrc = CreateAudioSource(IntTurboSnd.Audio, true, true, enginePositionV);
     }
     
     void Update ()
@@ -236,7 +244,10 @@ public class CarSound : MonoBehaviour
     {
         for (int i = 0; i < src.Length; i++)
         {
-            src[i].volume = 0.0f;
+            if (src[i] != null)
+            {
+                src[i].volume = 0.0f;
+            }
         }
     }
 

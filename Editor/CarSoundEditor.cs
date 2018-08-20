@@ -241,6 +241,27 @@ public class CarSoundEditor : Editor
         carSound.ExtLimiterSnd.Pitch = EditorGUILayout.CurveField(carSound.ExtLimiterSnd.Pitch);
         EditorGUILayout.EndHorizontal();
 
+        // TURBO ----------------------------------------------------------------------------------------------------------------------------------
+        GUILayout.Space(5);
+        EditorGUILayout.BeginHorizontal();
+        EditorGUILayout.LabelField("Turbo:");
+        EditorGUILayout.EndHorizontal();
+
+        if (carSound.ExtTurboSnd.Volume == null) carSound.ExtTurboSnd.Volume = new AnimationCurve();
+        if (carSound.ExtTurboSnd.Pitch == null) carSound.ExtTurboSnd.Pitch = new AnimationCurve();
+        EditorGUILayout.BeginHorizontal();
+        carSound.ExtTurboSnd.Audio = (AudioClip)EditorGUILayout.ObjectField(carSound.ExtTurboSnd.Audio, typeof(AudioClip), true);
+        EditorGUILayout.EndHorizontal();
+
+        EditorGUILayout.BeginHorizontal();
+        EditorGUILayout.PrefixLabel("Volume:");
+        carSound.ExtTurboSnd.Volume = EditorGUILayout.CurveField(carSound.ExtTurboSnd.Volume);
+        EditorGUILayout.EndHorizontal();
+        EditorGUILayout.BeginHorizontal();
+        EditorGUILayout.PrefixLabel("Pitch:");
+        carSound.ExtTurboSnd.Pitch = EditorGUILayout.CurveField(carSound.ExtTurboSnd.Pitch);
+        EditorGUILayout.EndHorizontal();
+
         #endregion EXTERNAL
 
         GUI.color = new Color32(44, 203, 220, 255);
@@ -446,6 +467,27 @@ public class CarSoundEditor : Editor
         EditorGUILayout.BeginHorizontal();
         EditorGUILayout.PrefixLabel("Pitch:");
         carSound.IntLimiterSnd.Pitch = EditorGUILayout.CurveField(carSound.IntLimiterSnd.Pitch);
+        EditorGUILayout.EndHorizontal();
+
+        // TURBO ----------------------------------------------------------------------------------------------------------------------------------
+        GUILayout.Space(5);
+        EditorGUILayout.BeginHorizontal();
+        EditorGUILayout.LabelField("Turbo:");
+        EditorGUILayout.EndHorizontal();
+
+        if (carSound.IntTurboSnd.Volume == null) carSound.IntTurboSnd.Volume = new AnimationCurve();
+        if (carSound.IntTurboSnd.Pitch == null) carSound.IntTurboSnd.Pitch = new AnimationCurve();
+        EditorGUILayout.BeginHorizontal();
+        carSound.IntTurboSnd.Audio = (AudioClip)EditorGUILayout.ObjectField(carSound.IntTurboSnd.Audio, typeof(AudioClip), true);
+        EditorGUILayout.EndHorizontal();
+
+        EditorGUILayout.BeginHorizontal();
+        EditorGUILayout.PrefixLabel("Volume:");
+        carSound.IntTurboSnd.Volume = EditorGUILayout.CurveField(carSound.IntTurboSnd.Volume);
+        EditorGUILayout.EndHorizontal();
+        EditorGUILayout.BeginHorizontal();
+        EditorGUILayout.PrefixLabel("Pitch:");
+        carSound.IntTurboSnd.Pitch = EditorGUILayout.CurveField(carSound.IntTurboSnd.Pitch);
         EditorGUILayout.EndHorizontal();
 
         #endregion INTERNAL

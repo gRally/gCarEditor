@@ -166,7 +166,15 @@ public class CarPhysics : MonoBehaviour
             it++;
         }
         x.AppendLine(string.Format("{0}{0}</Torque>", t));
+        // Turbo
+        x.AppendLine(string.Format("{0}{0}<Turbo", t));
+        x.AppendLine(string.Format("{0}{0}{0}maxBoost=\"{1}\"", t, engine.MaxBoost));
+        x.AppendLine(string.Format("{0}{0}{0}lag=\"{1}, {2}\"", t, engine.LagPower, engine.LagCoaster));
+        x.AppendLine(string.Format("{0}{0}{0}wastegate=\"{1}\"", t, engine.Wastegate));
+        x.AppendLine(string.Format("{0}{0}{0}rpmMax=\"{1}\">", t, engine.RpmTurboMax));
+        x.AppendLine(string.Format("{0}{0}</Turbo>", t));
         x.AppendLine(string.Format("{0}</Engine>", t));
+
 
         // clutch
         var clutch = transform.GetComponentInChildren<GR_PhClutch>();
