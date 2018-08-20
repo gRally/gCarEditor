@@ -198,8 +198,9 @@ public class CarPhysics : MonoBehaviour
         x.AppendLine(string.Format("{0}<Differentials>", t));
         var differential = transform.GetComponentInChildren<GR_PhDifferential>();
 
-        var front = differential.TransmissionType == GR_PhDifferential.TRANSMISSION_TYPE.FWD;
-        var rear = differential.TransmissionType == GR_PhDifferential.TRANSMISSION_TYPE.RWD;
+        var front = differential.TransmissionType == GR_PhDifferential.TRANSMISSION_TYPE.FWD || differential.TransmissionType == GR_PhDifferential.TRANSMISSION_TYPE.AWD;
+        var central = differential.TransmissionType == GR_PhDifferential.TRANSMISSION_TYPE.AWD;
+        var rear = differential.TransmissionType == GR_PhDifferential.TRANSMISSION_TYPE.RWD || differential.TransmissionType == GR_PhDifferential.TRANSMISSION_TYPE.AWD;
 
         if (front)
         {
@@ -209,11 +210,34 @@ public class CarPhysics : MonoBehaviour
             {
                 x.AppendLine(string.Format("{0}{0}{0}tbr=\"{1}\"", t, differential.Front.Tbr));
             }
+            else if (differential.Front.Type == GR_PhDifferential.DIFFERENTIAL_TYPE.LSD_1_WAY ||
+                differential.Front.Type == GR_PhDifferential.DIFFERENTIAL_TYPE.LSD_2_WAY ||
+                differential.Front.Type == GR_PhDifferential.DIFFERENTIAL_TYPE.LSD_15_WAY ||
+                differential.Front.Type == GR_PhDifferential.DIFFERENTIAL_TYPE.SPEED)
+            {
+                x.AppendLine(string.Format("{0}{0}{0}antiSlip=\"{1}\"", t, differential.Front.AntiSlip));
+            }
             x.AppendLine(string.Format("{0}{0}{0}final=\"{1}\">", t, differential.Front.FinalDrive));
-            //x.AppendLine(string.Format("{0}{0}{0}antiSlipTorque=\"{1}\">S", t, differential.Front.AntiSlipTorque));
-            //x.AppendLine(string.Format("{0}{0}{0}decelerationFactor=\"{1}\"", t, differential.Front.DecelerationFactor));
-            //x.AppendLine(string.Format("{0}{0}{0}split=\"{1}\">", t, differential.Front.Split * 0.01f));
             x.AppendLine(string.Format("{0}{0}</Front>", t));
+        }
+        if (central)
+        {
+            x.AppendLine(string.Format("{0}{0}<Central", t));
+            x.AppendLine(string.Format("{0}{0}{0}type=\"{1}\"", t, (int)differential.Central.Type));
+            if (differential.Central.Type == GR_PhDifferential.DIFFERENTIAL_TYPE.TORSEN)
+            {
+                x.AppendLine(string.Format("{0}{0}{0}tbr=\"{1}\"", t, differential.Central.Tbr));
+            }
+            else if (differential.Central.Type == GR_PhDifferential.DIFFERENTIAL_TYPE.LSD_1_WAY ||
+                differential.Central.Type == GR_PhDifferential.DIFFERENTIAL_TYPE.LSD_2_WAY ||
+                differential.Central.Type == GR_PhDifferential.DIFFERENTIAL_TYPE.LSD_15_WAY ||
+                differential.Central.Type == GR_PhDifferential.DIFFERENTIAL_TYPE.SPEED)
+            {
+                x.AppendLine(string.Format("{0}{0}{0}antiSlip=\"{1}\"", t, differential.Central.AntiSlip));
+            }
+            x.AppendLine(string.Format("{0}{0}{0}final=\"{1}\"", t, differential.Central.FinalDrive));
+            x.AppendLine(string.Format("{0}{0}{0}split=\"{1}\">", t, differential.Central.Split * 0.01f));
+            x.AppendLine(string.Format("{0}{0}</Central>", t));
         }
         if (rear)
         {
@@ -223,10 +247,14 @@ public class CarPhysics : MonoBehaviour
             {
                 x.AppendLine(string.Format("{0}{0}{0}tbr=\"{1}\"", t, differential.Rear.Tbr));
             }
+            else if (differential.Rear.Type == GR_PhDifferential.DIFFERENTIAL_TYPE.LSD_1_WAY ||
+                differential.Rear.Type == GR_PhDifferential.DIFFERENTIAL_TYPE.LSD_2_WAY ||
+                differential.Rear.Type == GR_PhDifferential.DIFFERENTIAL_TYPE.LSD_15_WAY ||
+                differential.Rear.Type == GR_PhDifferential.DIFFERENTIAL_TYPE.SPEED)
+            {
+                x.AppendLine(string.Format("{0}{0}{0}antiSlip=\"{1}\"", t, differential.Rear.AntiSlip));
+            }
             x.AppendLine(string.Format("{0}{0}{0}final=\"{1}\">", t, differential.Rear.FinalDrive));
-            //x.AppendLine(string.Format("{0}{0}{0}antiSlipTorque=\"{1}\">", t, differential.Rear.AntiSlipTorque));
-            //x.AppendLine(string.Format("{0}{0}{0}decelerationFactor=\"{1}\"", t, differential.Rear.DecelerationFactor));
-            //x.AppendLine(string.Format("{0}{0}{0}split=\"{1}\">", t, differential.Rear.Split * 0.01f));
             x.AppendLine(string.Format("{0}{0}</Rear>", t));
         }
         x.AppendLine(string.Format("{0}</Differentials>", t));
