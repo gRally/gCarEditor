@@ -11,7 +11,7 @@ public class CarLiveryEditor : Editor
     {
         CarLivery carLivery = target as CarLivery;
     }
-    
+
     private bool showPattern = true;
     private bool showNumberPlates = true;
     private bool showDriverName = true;
@@ -22,7 +22,7 @@ public class CarLiveryEditor : Editor
     BMObject fDriverNameLeft;
     BMObject fDriverNameRight;
     List<BMObject> fDecals;
-    
+
     public override void OnInspectorGUI()
     {
         CarLivery carLivery = target as CarLivery;
@@ -37,10 +37,10 @@ public class CarLiveryEditor : Editor
         var obj = new SerializedObject(target);
 
         // TODO: capire quale � quello da gestire, se il LiveryMat o DestinationMaterial
-        EditorGUILayout.LabelField ("Livery Material");
+        EditorGUILayout.LabelField("Livery Material");
         carLivery.LiveryMat = (Material)EditorGUILayout.ObjectField(carLivery.LiveryMat, typeof(Material), true);
         EditorGUILayout.Separator();
-        
+
         EditorGUILayout.PropertyField(obj.FindProperty("Patterns"), true);
         obj.ApplyModifiedProperties();
 
@@ -78,6 +78,27 @@ public class CarLiveryEditor : Editor
             EditorGUI.indentLevel--;
         }
 
+        EditorGUILayout.Separator();
+        EditorGUILayout.LabelField("default rim");
+        //EditorGUILayout.PropertyField(obj.FindProperty("rimName"));
+        carLivery.rimSelected = EditorGUILayout.Popup(carLivery.rimSelected, carLivery.RimFriendlyNames);
+        //GUI.DrawTexture(new Rect(10, 10, 60, 60), Resources.Load<Texture2D>("Textures/Rims/" + carLivery.RimFriendlyNames[carLivery.rimSelected]));
+        GUILayout.Box(Resources.Load<Texture2D>("Textures/Rims/" + carLivery.RimFriendlyNames[carLivery.rimSelected]));
+        EditorGUILayout.PropertyField(obj.FindProperty("rimSmoothness"));
+        EditorGUILayout.PropertyField(obj.FindProperty("rimColor1"), new GUIContent("Base"));
+        EditorGUILayout.PropertyField(obj.FindProperty("rimColor2"), new GUIContent("Detail"));
+        EditorGUILayout.PropertyField(obj.FindProperty("rimColor3"), new GUIContent("Text"));
+        obj.ApplyModifiedProperties();
+
+        EditorGUILayout.Separator();
+        EditorGUILayout.LabelField("default caliper");
+        EditorGUILayout.PropertyField(obj.FindProperty("caliperSmoothness"));
+        EditorGUILayout.PropertyField(obj.FindProperty("caliperColor1"), new GUIContent("Base"));
+        EditorGUILayout.PropertyField(obj.FindProperty("caliperColor2"), new GUIContent("Detail"));
+        EditorGUILayout.PropertyField(obj.FindProperty("caliperColor3"), new GUIContent("Text"));
+        obj.ApplyModifiedProperties();
+
+        EditorGUILayout.Separator();
         GUI.color = new Color32(134, 214, 164, 255);
         if (GUILayout.Button("Draw Texture"))
         {

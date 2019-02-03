@@ -94,11 +94,10 @@ public class GR_PhWheelEditorEditor : Editor
         GUILayout.Space(10);
         EditorGUILayout.LabelField("Wheel", EditorStyles.boldLabel);
         EditorGUILayout.PropertyField(serializedObject.FindProperty("WheelPosition"), new GUIContent("[O]"));
-        GUILayout.Space(5);
-        EditorGUILayout.PropertyField(serializedObject.FindProperty("WheelSize"), new GUIContent ("Tyre size"));
-        GUILayout.Space(5);
-        EditorGUILayout.PropertyField(serializedObject.FindProperty("NominalPressure"), new GUIContent("Nominal Pressure [bar]"));
-        GUILayout.Space(5);
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("WheelSize"), new GUIContent ("Tarmac Tyre size"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("NominalPressure"), new GUIContent("Nominal Tarmac Pressure [bar]"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("GravelWheelSize"), new GUIContent("Gravel Tyre size"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("GravelNominalPressure"), new GUIContent("Nominal Gravel Pressure [bar]"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("Camber"), new GUIContent("Camber [°]"));
         //EditorGUILayout.PropertyField(serializedObject.FindProperty("CurrentCamber"), new GUIContent("Curr.Camber [°]"));
 

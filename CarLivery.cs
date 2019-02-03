@@ -32,6 +32,35 @@ public class CarLivery : MonoBehaviour
 
     gPhys.Livery.Helper helper;
 
+    public string[] RimFriendlyNames = new string[]
+    {
+        "13",
+        "19",
+        "Evo",
+        "G1",
+        "G2",
+        "OZ",
+        "ST",
+    };
+
+    public int rimSelected = 2;
+    public float rimSmoothness = 0.8f;
+    [SerializeField]
+    public Color rimColor1 = new Color32(173, 173, 173, 255); 
+    [SerializeField]
+    public Color rimColor2 = new Color32(173, 173, 173, 255);
+    [SerializeField]
+    public Color rimColor3 = new Color32(173, 173, 173, 255);
+
+
+    public float caliperSmoothness = 0.904f;
+    [SerializeField]
+    public Color caliperColor1 = new Color32(162, 0, 0, 255);
+    [SerializeField]
+    public Color caliperColor2 = new Color32(255, 202, 0, 255);
+    [SerializeField]
+    public Color caliperColor3 = new Color32(255, 255, 255, 255);
+
     void Start()
     {
         helper = new gPhys.Livery.Helper();

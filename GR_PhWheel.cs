@@ -5,8 +5,10 @@ using System.Collections;
 public class GR_PhWheel : MonoBehaviour
 {
     //Mesh w;
-    public string WheelSize = "195/50 R15";
+    public string WheelSize = "24/61-17";
+    public string GravelWheelSize = "24/61-17";
     public float NominalPressure;
+    public float GravelNominalPressure;
     public float Camber;
     public float CurrentCamber;
     public float Caster;
@@ -54,6 +56,7 @@ public class GR_PhWheel : MonoBehaviour
 
     private gPhys.Suspensions.Suspension susp = new gPhys.Suspensions.Suspension();
     private gPhys.Wheel.Gizmo gizmo = new gPhys.Wheel.Gizmo();
+    private gPhys.Wheel.Gizmo gravelGizmo = new gPhys.Wheel.Gizmo();
 
     public enum SUSPENSION_TYPE
     {
@@ -77,6 +80,13 @@ public class GR_PhWheel : MonoBehaviour
         }
         gizmo.SetRacingSize(WheelSize);
         gizmo.Create();
+    }
+
+    public Vector3 GetGravelSize()
+    {
+        gravelGizmo = new gPhys.Wheel.Gizmo();
+        gravelGizmo.SetRacingSize(GravelWheelSize);
+        return gravelGizmo.GetSize();
     }
 
     // Update is called once per frame

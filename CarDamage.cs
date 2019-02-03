@@ -10,7 +10,8 @@ public class CarDamage : MonoBehaviour
     public void FindMeshes()
     {
         List<MeshFilter> meshesTmp = new List<MeshFilter>();
-        var arrend = (Renderer[])Resources.FindObjectsOfTypeAll(typeof(Renderer));
+        var arrend = FindObjectsOfType<Renderer>();
+        //var arrend = (Renderer[])Resources.FindObjectsOfTypeAll(typeof(Renderer));
         foreach (var rend in arrend)
         {
             if (rend != null)

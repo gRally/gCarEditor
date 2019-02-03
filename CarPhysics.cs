@@ -175,7 +175,6 @@ public class CarPhysics : MonoBehaviour
         x.AppendLine(string.Format("{0}{0}</Turbo>", t));
         x.AppendLine(string.Format("{0}</Engine>", t));
 
-
         // clutch
         var clutch = transform.GetComponentInChildren<GR_PhClutch>();
         x.AppendLine(string.Format("{0}<Clutch", t));
@@ -354,8 +353,10 @@ public class CarPhysics : MonoBehaviour
 
                 x.AppendLine(string.Format("{0}{0}{0}<Tyre", t));
                 x.AppendLine(string.Format("{0}{0}{0}{0}size=\"{1}, {2}, {3}\"", t, Convert.ToInt32(item.GetSize().x), Convert.ToInt32(item.GetSize().z), Convert.ToInt32(item.GetSize().y)));
+                x.AppendLine(string.Format("{0}{0}{0}{0}gravelSize=\"{1}, {2}, {3}\"", t, Convert.ToInt32(item.GetGravelSize().x), Convert.ToInt32(item.GetGravelSize().z), Convert.ToInt32(item.GetGravelSize().y)));
                 x.AppendLine(string.Format("{0}{0}{0}{0}type=\"tyres/SavunGrip\"", t));
-                x.AppendLine(string.Format("{0}{0}{0}{0}pressure=\"{1}\">", t, item.NominalPressure));
+                x.AppendLine(string.Format("{0}{0}{0}{0}pressure=\"{1}\"", t, item.NominalPressure));
+                x.AppendLine(string.Format("{0}{0}{0}{0}gravelPressure=\"{1}\">", t, item.GravelNominalPressure));
                 x.AppendLine(string.Format("{0}{0}{0}</Tyre>", t));
 
                 x.AppendLine(item.WheelPosition == gPhys.WHEEL_POSITION.FRONT_LEFT ? string.Format("{0}{0}</Front>", t) : string.Format("{0}{0}</Rear>", t));
@@ -368,11 +369,15 @@ public class CarPhysics : MonoBehaviour
         x.AppendLine(string.Format("{0}<Brakes>", t));
         x.AppendLine(string.Format("{0}{0}<Front", t));
         x.AppendLine(string.Format("{0}{0}{0}repartition=\"{1}\"", t, brake.FrontRepartition * 0.01f));
-        x.AppendLine(string.Format("{0}{0}{0}torque=\"{1}\">", t, brake.FrontTorque));
+        x.AppendLine(string.Format("{0}{0}{0}torque=\"{1}\"", t, brake.FrontTorque));
+        x.AppendLine(string.Format("{0}{0}{0}discDiameter=\"{1}\"", t, brake.FrontDiscDiameter));
+        x.AppendLine(string.Format("{0}{0}{0}caliperAngle=\"{1}\">", t, brake.FrontCaliperAngle));
         x.AppendLine(string.Format("{0}{0}</Front>", t));
         x.AppendLine(string.Format("{0}{0}<Rear", t));
         x.AppendLine(string.Format("{0}{0}{0}handBrake=\"{1}\"", t, brake.HandBrake));
-        x.AppendLine(string.Format("{0}{0}{0}torque=\"{1}\">", t, brake.RearTorque));
+        x.AppendLine(string.Format("{0}{0}{0}torque=\"{1}\"", t, brake.RearTorque));
+        x.AppendLine(string.Format("{0}{0}{0}discDiameter=\"{1}\"", t, brake.RearDiscDiameter));
+        x.AppendLine(string.Format("{0}{0}{0}caliperAngle=\"{1}\">", t, brake.RearCaliperAngle));
         x.AppendLine(string.Format("{0}{0}</Rear>", t));
         x.AppendLine(string.Format("{0}</Brakes>", t));
 

@@ -5,12 +5,15 @@ public class GR_PhBrake : MonoBehaviour
 {
     [Header("Front")]
     public float FrontTorque;
-    [Space(5)]
     public float FrontRepartition;
+    public float FrontDiscDiameter;
+    [Tooltip("0 down, 90 front")]
+    public float FrontCaliperAngle;
 
     [Header("Rear")]
-    [Space(10)]
     public float RearTorque;
-    [Space(5)]
     public float HandBrake;
+    public float RearDiscDiameter;
+    [Tooltip("0 down, 90 front")]
+    public float RearCaliperAngle;
 }
